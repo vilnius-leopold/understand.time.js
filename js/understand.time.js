@@ -31,7 +31,7 @@ var am_pm_pattern = new RegExp(am_pm_pattern_string, "i");
 //Setting time-zone
 default_time_zone = default_time_zone.trim();
 
-if(default_time_zone == 'auto' || default_time_zone = '')
+if(default_time_zone == 'auto' || default_time_zone == '')
 {
 	default_time_zone = new Date().getTimezoneOffset();
 }
