@@ -3,9 +3,10 @@ understand.mytime.js
 
 understand.mytime.js is a js library that parses the human understanding of time, appointments and calendar to a computer readable time format.
 
-### 1. Supported languages: EN
+## 1. Supported languages: 
+English
 
-### 2. Recognised Inputs
+## 2. Recognised Inputs
 
 It recognises complete or non-ambigious abriviations of the following type:
 
@@ -13,9 +14,8 @@ It recognises complete or non-ambigious abriviations of the following type:
 	- absolute:
 		- am/pm
 		- 24h
-
 	- relative:
-		- in [min, hours]
+		- in [number] min / hours
 
 ### 2.2 Date
 	- absolute
@@ -30,4 +30,9 @@ It recognises complete or non-ambigious abriviations of the following type:
 		- in [number] days
 		- in [number] weeks
 		- in [number] months
+
+### 2.3 Timezones
+	- uk
+	- de 
+	- lt
 
