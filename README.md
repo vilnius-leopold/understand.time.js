@@ -1,7 +1,8 @@
-understand.mytime.js
+understand.time.js
 ====================
 
-understand.mytime.js is a js library that parses the human understanding of time to a computer readable time format.
+understand.time.js is a js library that parses the human understanding of time to a computer readable time format.  
+For a better understanding what understand.time.js does view the [Examples](#3-examples) below.
 
 ## 1. Supported languages: 
 * English
@@ -13,11 +14,11 @@ understand.mytime.js is a js library that parses the human understanding of time
 It recognises complete or non-ambigious abriviations of the following type:
 
 ### 2.1 Time
-	- absolute:
-		- am/pm
-		- 24h
-	- relative:
-		- in [number] min / hours
+* absolute:
+	- am/pm
+	- 24h
+* relative:
+	- in [number] min / hours
 
 Time format:
 minute - hour - timeformat - timezone [optional]
