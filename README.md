@@ -18,12 +18,12 @@ It recognises complete or non-ambigious abriviations of the following type:
 	- am/pm
 	- 24h
 * relative:
-	- in [number] min / hours
+	- in [int] min / hours
 
-Time format:
+Time format:  
 minute - hour - timeformat - timezone [optional]
 
-[number] [devider ':'] [number] [devider ' '] [timeformat indecator 'am/pm, h']
+[int] [devider ':'] [int] [devider ' '] [timeformat indecator 'am/pm, h']
 
 
 ### 2.2 Date
@@ -36,14 +36,14 @@ minute - hour - timeformat - timezone [optional]
 	- [mixed numeric and literal date format]
 
 * relative
-	- in [number] days
-	- in [number] weeks
-	- in [number] months
+	- in [int] days
+	- in [int] weeks
+	- in [int] months
 
-Date format:
+Date format:  
 day - month - year - timezone [optional]
 
-[number] [devider '.', '-', '/' or 'st', 'nd', 'rd', 'th'][+ 'of'] [number or name] [devider '.', '-', '/'] [4 digit number or ''' + 2 digit number]
+[int] [devider '.', '-', '/' or 'st', 'nd', 'rd', 'th'][+ 'of'] [int or string] [devider '.', '-', '/'] [4 digit int or ''' + 2 digit int]
 
 ### 2.3 Timezones
 * auto [default]--> usese the current client time-zone
