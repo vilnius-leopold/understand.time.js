@@ -40,7 +40,7 @@ if(default_time_zone == 'auto' || default_time_zone == '')
 var imploded_weekdays = "";
 
 
-//implodes to (M?o?n?d?a?y?)
+//implodes to (M?o?n?d?a?y?)|(T?u?e?s?d?a?y?)|...
 for(var i = 0; i < 7; i++)
 {
 	var weekday = weekdays[i];
@@ -88,4 +88,17 @@ function implode(item_array)
 	}
 
 	return imploded_string;
+}
+
+var understand = {
+
+	time: function(human_time){
+
+		console.log('input: ' + human_time);
+
+		var computer_time = '16:00 26-07-2013 GMT+01:00';
+
+		return computer_time;
+	}
+
 }

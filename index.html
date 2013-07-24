@@ -7,11 +7,10 @@
 			font-family: 'Helvetica', sans-serif;
 			color: #333;
 		}
-		div{margin: 20px; font-size: 0;}
-		h3{margin: 0 20px;}
+		div{margin: 20px 0; font-size: 0;}
 		label{width: 120px;}
 
-		input,span,label,button, code {
+		input,span,label,button,code{
 			line-height: 30px;
 			display: inline-block;
 			margin-right: 10px;
@@ -26,11 +25,12 @@
 			height: 30px;
 			vertical-align: middle;
 		}
+		
 		input{width: 300px;}
-		input,button {
+		input, button, code {
 			border: 1px solid #d3d3d3;
 			border-radius: 0;
-			padding: 2px 18px;
+			padding: 0px 18px;
 			border-radius: 2px;
 		}
 
@@ -39,7 +39,6 @@
 			background: #efefef;
 			color: #444;
 			line-height: 16px;
-			padding-top: 1px;
 			
 			-webkit-transition: color 0.1s, background 0.1s, border-color 0.1s;
 			-moz-transition: color 0.1s, background 0.1s, border-color 0.1s;
@@ -51,7 +50,7 @@
 		button:hover {
 			background: #e9e9e9; color:  #222; border-color: #c9c9c9;
 		}
-		code#computer_time{font-family: monospace; background: #f3f3f3; width: 300px; text-align: center;}
+		code#computer_time{font-family: monospace; background: #f3f3f3; width: 300px; border: none;}
 
 	</style>
 	<script type="text/javascript" src="js/jquery.js"></script>
@@ -63,12 +62,39 @@
 		<label>Human time:</label>
 		<input type="text" name="human_time" value="next friday 4pm">
 	</div>
-	<div>		
-		<label>Computer time:</label><code id="computer_time">16:00 26-07-2013 GMT+01:00</code>
+	<div>
+		<label>Computer time:</label><code id="computer_time"></code>
 	</div>
 	<div>
 		<button>Understand me!</button>
 	</div>
-	
+	<script>
+
+		// initial
+		understand_and_display();
+
+
+		// on click
+		$('button').click(function(){
+
+			understand_and_display();
+
+		});
+
+
+
+		function understand_and_display()
+		{
+			var human_time = $('input[name="human_time"]').val();
+			console.log(human_time);
+			
+			var computer_time = understand.time(human_time);
+
+			console.log(computer_time);
+
+			$('code#computer_time').html(computer_time);
+		}		
+
+	</script>
 </body>
 </html>
