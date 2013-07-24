@@ -1,0 +1,534 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"func_",
+				"func_get_args"
+			],
+			[
+				"html",
+				"html	html5"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "Packages/CSS/minify_css.sublime-build",
+	"command_palette":
+	{
+		"height": 117.0,
+		"selected_items":
+		[
+			[
+				"git push",
+				"Git: Push"
+			],
+			[
+				"git comm",
+				"Git: Commit"
+			],
+			[
+				"git add ",
+				"Git: Add Current File"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"fetch f",
+				"Fetch: File"
+			],
+			[
+				"html5",
+				"Snippet: html5"
+			],
+			[
+				"fetch",
+				"Fetch: Package"
+			],
+			[
+				"ci mo",
+				"Snippet: CI - Base Model"
+			],
+			[
+				"ci con",
+				"Snippet: CI - Base Controller"
+			],
+			[
+				"snipp ci co",
+				"Snippet: CI - Base Controller"
+			],
+			[
+				"fetch ",
+				"Fetch: Package"
+			],
+			[
+				"word",
+				"Word Wrap: Toggle"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"fetch p",
+				"Fetch: Package"
+			],
+			[
+				"fetch ma",
+				"Fetch: Manage"
+			],
+			[
+				"wordw",
+				"Word Wrap: Toggle"
+			],
+			[
+				"snipp html5",
+				"Snippet: html5"
+			],
+			[
+				"word ",
+				"Word Wrap: Toggle"
+			],
+			[
+				"toggle sid",
+				"View: Toggle Side Bar"
+			],
+			[
+				"snipp",
+				"Snippet: html5"
+			],
+			[
+				"copy path from pro",
+				"File: Copy Path From Project"
+			],
+			[
+				"syntax ht",
+				"Set Syntax: HTML"
+			],
+			[
+				"	",
+				"Emmet: Decrement Number by 0.1"
+			],
+			[
+				"synta html",
+				"Set Syntax: HTML"
+			],
+			[
+				"snippet ci",
+				"Snippet: CI - Base Controller"
+			],
+			[
+				"intall",
+				"Package Control: Install Package"
+			],
+			[
+				"mana",
+				"Fetch: Manage"
+			],
+			[
+				"snippet con",
+				"Snippet: CI - Base Controller"
+			],
+			[
+				"snippet html",
+				"Snippet: html"
+			],
+			[
+				"synt html",
+				"Set Syntax: HTML"
+			],
+			[
+				"snippet",
+				"Snippet: html"
+			],
+			[
+				"synta php",
+				"Set Syntax: PHP"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"mini",
+				"View: Toggle Minimap"
+			],
+			[
+				"toggle side",
+				"View: Toggle Side Bar"
+			],
+			[
+				"sidebar",
+				"View: Toggle Side Bar"
+			],
+			[
+				"toggle minimap",
+				"View: Toggle Minimap"
+			],
+			[
+				"toggle  mini",
+				"View: Toggle Minimap"
+			],
+			[
+				"side",
+				"View: Toggle Open Files in Side Bar"
+			],
+			[
+				"sidb",
+				"View: Toggle Open Files in Side Bar"
+			],
+			[
+				"php",
+				"Set Syntax: PHP"
+			],
+			[
+				"syn php",
+				"Set Syntax: PHP"
+			],
+			[
+				"synt js",
+				"Set Syntax: JavaScript"
+			]
+		],
+		"width": 334.0
+	},
+	"console":
+	{
+		"height": 202.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/leo/understand.mytime.js/README.md",
+		"/home/leo/understand.mytime.js/index.html",
+		"/home/leo/Documents/jh",
+		"/home/leo/understand.mytime.js/js/understand.time.js",
+		"/home/leo/.gitconfig",
+		"/home/leo/Desktop/node",
+		"/home/leo/Desktop/todo.txt",
+		"/home/leo/understand.mytime.js/README",
+		"/home/leo/.config/sublime-text-2/Packages/User/SideBarEnhancements/Open With/Side Bar.sublime-menu",
+		"/home/leo/understand.mytime.js/js/jquery.js",
+		"/home/leo/understand.mytime.js/js/understan.time.js",
+		"/home/leo/Desktop/dev/rest_task/application/config/config.php",
+		"/home/leo/Desktop/dev/rest_task/application/controllers/store.php",
+		"/home/leo/Desktop/booking",
+		"/home/leo/Desktop/Windows 7/Power ISO/Read Me!!.txt",
+		"/home/leo/Desktop/port",
+		"/home/leo/Desktop/dev/rest_task/application/config/routes.php",
+		"/home/leo/Desktop/dev/rest_task/application/models/api_model.php",
+		"/home/leo/Desktop/dev/rest_api/application/controllers/display_response.php",
+		"/home/leo/Desktop/Documents/jh",
+		"/home/leo/Desktop/dev/rest_api/assets/php_client/mfsapi.php",
+		"/home/leo/Desktop/dev/rest_api/assets/php_client/test_settings.php.dist",
+		"/home/leo/Desktop/dev/rest_api/assets/php_client/json4php4.php",
+		"/home/leo/Desktop/dev/rest_api/assets/php_client/README",
+		"/home/leo/Desktop/dev/rest_api/assets/php_client/tests/02get_track.php",
+		"/home/leo/Desktop/dev/resources/PHP/codeigniter-curl/config/autoload.php",
+		"/home/leo/Desktop/dev/resources/PHP/codeigniter-curl/README.md",
+		"/home/leo/Desktop/cissme_docs.html",
+		"/home/leo/Desktop/dev/rest_api/application/config/config.php",
+		"/home/leo/Desktop/dev/rest_api/rest_api.sublime-project",
+		"/home/leo/Desktop/dev/rest_api/josef_semaan.sublime-workspace",
+		"/home/leo/Desktop/style_09may.min.css",
+		"/var/tmp/kdecache-leo/krun/5286_0_style_09may.css",
+		"/home/leo/.config/sublime-text-2/Packages/CSS/minify_css",
+		"/home/leo/Desktop/test.compiled.css",
+		"/home/leo/.config/sublime-text-2/Packages/LESS/compile_less",
+		"/home/leo/.config/sublime-text-2/Packages/CSS/minify_css.sublime-build",
+		"/home/leo/Desktop/minify_css",
+		"/home/leo/Desktop/test.compiled.min.css",
+		"/home/leo/Desktop/compile_less",
+		"/home/leo/.config/sublime-text-2/Packages/LESS/Less Compile.sublime-build",
+		"/home/leo/Desktop/test.less",
+		"/home/leo/Desktop/test.min.css",
+		"/home/leo/Desktop/test_run",
+		"/home/leo/Desktop/color_picker",
+		"/home/leo/Desktop/test.compile.css",
+		"/home/leo/Desktop/test.txt",
+		"/home/assets/css/test.min.css",
+		"/home/leo/.local/share/cinnamon/desklets/CloneApp@leo/stylesheet.css",
+		"/home/leo/.local/share/cinnamon/desklets/CloneApp@leo/README",
+		"/home/leo/.local/share/cinnamon/desklets/CloneApp@leo/orig_metadata.json",
+		"/home/leo/.local/share/cinnamon/desklets/CloneApp@leo/metadata.json",
+		"/home/leo/.local/share/cinnamon/desklets/CloneApp@leo/desklet.js",
+		"/home/leo/.local/share/cinnamon/desklets/TimeAndDate@nightflame/README",
+		"/home/leo/.local/share/cinnamon/desklets/TimeAndDate@nightflame/metadata.json",
+		"/home/leo/.local/share/cinnamon/desklets/TimeAndDate@nightflame/orig_metadata.json",
+		"/home/leo/.local/share/cinnamon/desklets/TimeAndDate@nightflame/desklet.js",
+		"/home/leo/.local/share/cinnamon/desklets/exampl@leo/settings-schema.json",
+		"/home/leo/.local/share/cinnamon/desklets/exampl@leo/metadata.json",
+		"/home/leo/.local/share/cinnamon/desklets/exampl@leo/applet.js",
+		"/home/assets/css/test.css",
+		"/var/tmp/kdecache-leo/krun/4225_0_index.html",
+		"/var/tmp/kdecache-leo/krun/4483_0_style_09may.css",
+		"/home/leo/Desktop/tod.txt",
+		"/home/leo/Desktop/dev/josef_semaan/media/readme.markdown",
+		"/home/leo/Desktop/dev/josef_semaan/application/modules/welcome/controllers/welcome.php",
+		"/home/leo/.config/sublime-text-2/Packages/User/Fetch.sublime-settings",
+		"/home/leo/Desktop/dev/josef_semaan/application/modules/login/views/login_page.php",
+		"/home/leo/Desktop/dev/josef_semaan/application/modules/login/controllers/login.php",
+		"/home/leo/Desktop/dev/josef_semaan/application/modules/welcome/views/welcome_message.php",
+		"/home/leo/Desktop/dev/josef_semaan/media/less/Documents",
+		"/home/leo/Desktop/dev/josef_semaan/application/login/controllers/login.php",
+		"/home/leo/Desktop/dev/josef_semaan/modules/login/controllers/login.php",
+		"/home/leo/Desktop/dev/josef_semaan/application/.htaccess",
+		"/home/leo/Desktop/dev/josef_semaan/.htaccess",
+		"/home/leo/Desktop/dev/josef_semaan/josef_semaan.sublime-project",
+		"/opt/lampp/etc/extra/httpd-vhosts.conf",
+		"/opt/lampp/etc/httpd.conf",
+		"/home/leo/Desktop/localhost2/index.html",
+		"/home/leo/Desktop/test.html",
+		"/opt/lampp/htdocs/dev/prototype/application/views/welcome_message.php",
+		"/home/leo/Desktop/dev/index.html",
+		"/home/leo/Desktop/dev/test/index.html",
+		"/etc/hosts",
+		"/home/leo/Desktop/test_project/index.html",
+		"/test/test.php",
+		"/test/cool.php",
+		"/opt/lampp/htdocs/dev/prototype/application/cool/nice.php",
+		"/opt/lampp/htdocs/dev/prototype/application/js/jquery.js",
+		"/home/leo/.config/sublime-text-2/Packages/SideBarEnhancements/messages/11.13.2012.1305.0.txt",
+		"/home/leo/Desktop/test.php",
+		"/home/leo/Desktop/jquery.js",
+		"/home/leo/.config/sublime-text-2/Packages/User/PHP/html5.sublime-snippet",
+		"/opt/lampp/htdocs/dev/prototype/application/controllers/welcome.php",
+		"/opt/lampp/htdocs/dev/prototype/application/.htaccess",
+		"/home/leo/Documents/test.php",
+		"/home/leo/.config/sublime-text-2/Packages/User/Preferences.sublime-settings",
+		"/home/leo/.config/sublime-text-2/Packages/Default/Preferences.sublime-settings",
+		"/home/leo/Documents/<?php"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"weekday_pattern_string",
+			"]; ?>",
+			"<?php echo $",
+			"safe_echo(r",
+			"]; ?>",
+			"echo $",
+			"decoded_response",
+			"status",
+			"$1",
+			"FILE",
+			"\", \"",
+			"max-w",
+			"test",
+			"gitignore",
+			"user_guide",
+			"install",
+			"great",
+			"\n</",
+			"\n<",
+			"# Virtual hosts",
+			"jeff",
+			"user ",
+			"\n$",
+			"12",
+			"var",
+			"\n$",
+			"var"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 210.0
+	},
+	"output.git-push":
+	{
+		"height": 118.0
+	},
+	"output.sftp":
+	{
+		"height": 0.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"re",
+				"README"
+			],
+			[
+				"ind",
+				"index.html"
+			],
+			[
+				"debu",
+				"application/helpers/debug_helper.php"
+			],
+			[
+				"controllersex",
+				"application/controllers/api/example.php"
+			],
+			[
+				"controex",
+				"application/controllers/api/example.php"
+			],
+			[
+				"conifg.php",
+				"application/config/config.php"
+			],
+			[
+				"media",
+				"media/readme.markdown"
+			],
+			[
+				"lo",
+				"application/modules/login/controllers/login.php"
+			],
+			[
+				"wel",
+				"application/modules/welcome/controllers/welcome.php"
+			],
+			[
+				"login",
+				"application/modules/login/controllers/login.php"
+			],
+			[
+				"wlecomm",
+				"application/modules/welcome/views/welcome_message.php"
+			],
+			[
+				"appht",
+				"application/.htaccess"
+			],
+			[
+				"inde",
+				"index.html"
+			],
+			[
+				"viewwel",
+				"views/welcome_message.php"
+			],
+			[
+				"welcom",
+				"controllers/welcome.php"
+			],
+			[
+				"w",
+				"controllers/welcome.php"
+			],
+			[
+				"ht",
+				".htaccess"
+			],
+			[
+				"welc",
+				"controllers/welcome.php"
+			],
+			[
+				"controller/w",
+				"controllers/welcome.php"
+			],
+			[
+				"prototype/in",
+				"/opt/lampp/htdocs/dev/prototype/index.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 206.0,
+	"status_bar_visible": true
+}
