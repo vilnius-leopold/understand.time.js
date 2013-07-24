@@ -1,26 +1,31 @@
-
-//Date Time Settings//
+//SETTINGS//
 
 var end_of_work = '18:00';
 
 var default_time_zone = 'auto'; //or lt, uk, de
 
-
-
 var weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Oktober', 'November', 'December'];
 
-var time_deviders = [':'];
-
 var date_deviders = ['.', '-', '/'];
 
+var time_deviders = [':'];
 
-//matches 28:36h
-var hour_24 = /^\s*(0?[0-9]|1[0-9]|2[0-4])(?:(?::)([0-5][0-9]))\s*h?/i;
+//--- END SETTINGS ---//
 
-//matches 28:36h
-var am_pm = /^\s*(0?[0-9]|1[0-2])(?:(?::)([0-5][0-9]))\s*(?:am|pm)?/i;
+var imploded_time_deviders = implode(time_deviders);
+
+//--- 24 HOURS TIME ---//
+var hour_24_pattern_string = "^\\s*(0?[0-9]|1[0-9]|2[0-4])(?:(?:" + imploded_time_deviders + ")([0-5][0-9]))\\s*h?";
+
+var hour_24_pattern = new RegExp(hour_24_pattern_string, "i");
+
+
+//--- AM/PM TIME ---//
+var am_pm_pattern_string = "^\\s*(0?[0-9]|1[0-2])(?:(?:" + imploded_time_deviders + ")([0-5][0-9]))\\s*(?:am|pm)?";
+
+var am_pm_pattern = new RegExp(am_pm_pattern_string, "i");
 
 
 //Setting time-zone
@@ -61,4 +66,26 @@ console.log(imploded_weekdays);
 var weekday_pattern_string = "^\\s*(" + imploded_weekdays + ")";
 
 
-var weekday_pattern = new RegExp("ab+c", "i");
+var weekday_pattern = new RegExp(weekday_pattern_string, "i");
+
+
+//--- FUNCTIONS ---//
+
+function implode(item_array)
+{
+	var imploded_string = "";
+
+	var item_count = item_array.length;
+
+	for(var i = 0; i < item_count; i++)
+	{	
+		if(i)
+		{
+			imploded_string += "|";
+		}
+
+		imploded_string += item_array[i];
+	}
+
+	return imploded_string;
+}
