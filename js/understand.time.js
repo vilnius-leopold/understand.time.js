@@ -16,17 +16,34 @@ var time_deviders = [':'];
 
 var imploded_time_deviders = implode(time_deviders);
 
-//--- 24 HOURS TIME ---//
-var hour_24_pattern_string = "^\\s*(0?[0-9]|1[0-9]|2[0-4])(?:(?:" + imploded_time_deviders + ")([0-5][0-9]))\\s*h?";
-
-var hour_24_pattern = new RegExp(hour_24_pattern_string, "i");
 
 
-//--- AM/PM TIME ---//
-var am_pm_pattern_string = "^\\s*(0?[0-9]|1[0-2])(?:(?:" + imploded_time_deviders + ")([0-5][0-9]))\\s*(?:am|pm)?";
+function test_time(test_string)
+{
+	console.log('testing time!');
 
-var am_pm_pattern = new RegExp(am_pm_pattern_string, "i");
+	//--- 24 HOURS TIME ---//
+	var hour_24_pattern_string = "^\\s*(0?[0-9]|1[0-9]|2[0-4])(?:(?:" + imploded_time_deviders + ")([0-5][0-9]))(?!\\s*(?:am|pm))\\s*h?";
 
+	var hour_24_pattern = new RegExp(hour_24_pattern_string, "i");
+
+	console.log(hour_24_pattern);
+
+	//--- AM/PM TIME ---//
+	var am_pm_pattern_string = "^\\s*(0?[0-9]|1[0-2])(?:(?:" + imploded_time_deviders + ")([0-5][0-9]))?\\s*(?:am|pm)";
+
+	var am_pm_pattern = new RegExp(am_pm_pattern_string, "i");
+
+	console.log(am_pm_pattern);
+
+	var result_24 = hour_24_pattern.exec(test_string);
+
+	var result_am_pm = am_pm_pattern.exec(test_string);
+
+	console.log(result_24);
+	console.log(result_am_pm);
+
+}
 
 //Setting time-zone
 default_time_zone = default_time_zone.trim();
@@ -38,8 +55,6 @@ if(default_time_zone == 'auto' || default_time_zone == '')
 
 ////////////////////
 //--- WEEKDAYS ---//
-
-
 function test_weekday(test_string)
 {
 	var day_of_the_week = null;
