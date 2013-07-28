@@ -36,37 +36,70 @@ if(default_time_zone == 'auto' || default_time_zone == '')
 	default_time_zone = new Date().getTimezoneOffset();
 }
 
+////////////////////
+//--- WEEKDAYS ---//
 
-var imploded_weekdays = "";
 
-
-//implodes to (M?o?n?d?a?y?)|(T?u?e?s?d?a?y?)|...
-for(var i = 0; i < 7; i++)
+function test_weekday(test_string)
 {
-	var weekday = weekdays[i];
-	var w_length = weekday.length;
+	var day_of_the_week = null;
+
+	//compose regex
+	var imploded_weekdays = deep_implode(weekdays);
+
+	var weekday_pattern_string = "^\\s*(?:" + imploded_weekdays + ")\\b";
+
+	var weekday_pattern = new RegExp(weekday_pattern_string, "i");
+
+
+	//run test
+	console.log('test string:' + test_string);
+
+	console.log('pattern:' + weekday_pattern);
+
+	var test_result = weekday_pattern.exec(test_string);
+
+	console.log('result: ' + test_result);
+
 	
-	if(i)
-	{
-		imploded_weekdays += "|";
+
+	if(test_result != null)
+	{		
+
+		var result_length = test_result.length;
+		//remove first item from result array
+		test_result.shift();		
+
+		for(var i = 0; i < result_length; i++)
+		{
+			if(test_result[i] != '' && test_result[i] != undefined)
+			{
+				day_of_the_week = i;
+				break;
+			}		
+		}
+
+		console.log('Found day of the week: ' + day_of_the_week);
 	}
 
-	imploded_weekdays += "(";
 
-	for(var k = 0; k < w_length; k++)
-	{
-		imploded_weekdays += weekday.charAt(k) + "?";		
-	}
-
-	imploded_weekdays += ")";	
+	return day_of_the_week;
 }
 
-console.log(imploded_weekdays);
 
-var weekday_pattern_string = "^\\s*(" + imploded_weekdays + ")";
+//understand object
+var understand = {
 
+	//time function
+	time: function(human_time){
 
-var weekday_pattern = new RegExp(weekday_pattern_string, "i");
+		console.log('input: ' + human_time);
+
+		var computer_time = '16:00 26-07-2013 GMT+01:00';
+
+		return computer_time;
+	}
+}
 
 
 //--- FUNCTIONS ---//
@@ -90,15 +123,51 @@ function implode(item_array)
 	return imploded_string;
 }
 
-var understand = {
+function deep_implode(item_array, devider, prefix, suffix, segmentation)
+{
 
-	time: function(human_time){
+	//DEFAULT VALUES
+	devider = typeof devider !== 'undefined' ? devider : '|';
+	prefix = typeof prefix !== 'undefined' ? prefix : '(';
+	suffix = typeof suffix !== 'undefined' ? suffix : ')';
+	segmentation = typeof segmentation !== 'undefined' ? segmentation : '?';
 
-		console.log('input: ' + human_time);
+	var imploded_items = ""; 
 
-		var computer_time = '16:00 26-07-2013 GMT+01:00';
+	item_count = item_array.length;
 
-		return computer_time;
+	//implodes to (Mo?n?d?a?y?)|(Tu?e?s?d?a?y?)|...
+	for(var i = 0; i < item_count; i++)
+	{
+		var item = item_array[i];
+		var item_length = item.length;
+		
+		
+
+		//add Devider
+		if(i)
+		{
+			imploded_items += devider;
+		}
+
+		//add prefix and look-ahead to test min and max-lenght
+		imploded_items += prefix + '(?=[a-z]{2,' + item_length + '}\\b)';
+
+		//deep implode
+		for(var k = 0; k < item_length; k++)
+		{
+			imploded_items += item.charAt(k);
+
+			if(k)
+			{
+				imploded_items += segmentation;
+			}
+					
+		}
+
+		//add Suffix
+		imploded_items += suffix;	
 	}
 
+	return imploded_items;
 }
