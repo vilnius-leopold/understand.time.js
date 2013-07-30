@@ -58,4 +58,22 @@ Currently there are only european timezones supported.
 * `GMT+1:00 --> de, fr, nl, it, es, at, ch, be, ...` (central europe)
 * `GMT+2:00 --> lt, gr, tr, ro, ...` (eastern europe)
 
-## 3 Examples
+## 3 Usage
+*Dependencies:*
+understand.time.js is intended to be a stand-alone javascript library (with possible jQuery integration in the futur).
+Currently due to ease of development it still depends on jquery .    
+* [jQuery](http://jquery.com/)(this dependency will be remove in the futur!)
+  
+*Include jQuery (won't be neccessary in the futur):*  
+To do so include the following script tag into your HTML `<head>`-tag:  
+* either include the included jQuery library like this:  `<script src="js/jquery.js"></script>` or
+* use the Google's hosted jQuery version like this:  `<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>`
+  
+*Include understand.time.js:*  
+To do so include the following script tag into your HTML `<head>`-tag:  
+* `<script src="js/understand.time.js"></script>`
+
+*Usage:*
+`var computer_time = understand.time(human_time);`
+
+## 4 Examples
