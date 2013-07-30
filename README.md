@@ -50,7 +50,7 @@ day - month - year - timezone [optional]
 [int] [devider '.', '-', '/' or 'st', 'nd', 'rd', 'th'][+ 'of'] [int or string] [devider '.', '-', '/'] [4 digit int or ''' + 2 digit int]
 
 ### 2.3 Timezones
-Next to custom namespace there are the names of countries according to ISO 3166. This corresponds with ccTLD (country code top-level domain).    
+Next to custom representations for the timezone `understand.time.js` uses the abbriviated names of countries according to [ISO 3166](https://en.wikipedia.org/wiki/ISO_3166) and [ccTLD](http://en.wikipedia.org/wiki/Country_code_top-level_domain) (country code top-level domain).  
 Currently there are only european timezones supported.  
 
 * `auto` [default] --> usese the current client time-zone of the browser
@@ -60,7 +60,7 @@ Currently there are only european timezones supported.
 
 ## 3 Usage
 
-**Dependencies:**  
+**1 Dependencies:**  
 understand.time.js is intended to be a stand-alone javascript library (with possible jQuery integration in the futur).  
 
 Currently due to ease of development it still depends on jquery .    
@@ -68,7 +68,7 @@ Currently due to ease of development it still depends on jquery .
 * [jQuery](http://jquery.com/) *(this dependency will be remove in the futur!)*
   
 
-**Include jQuery:** *(won't be neccessary in the futur)*  
+**2 Include jQuery:** *(won't be neccessary in the futur)*  
 To do so include the following script tag into your HTML `<head>`-tag:  
 * either include the included jQuery library like this:  
 `<script src="js/jquery.js"></script>`  
@@ -81,7 +81,8 @@ To do so include the following script tag into your HTML `<head>`-tag:
 To do so include the following script tag into your HTML `<head>`-tag:  
 * `<script src="js/understand.time.js"></script>`
 
-**Usage:**  
+**3 Enjoy:**  
+use it like this:  
 `var computer_time = understand.time(human_time);`
 
 ## 4 Examples
