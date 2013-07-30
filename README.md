@@ -53,9 +53,9 @@ day - month - year - timezone [optional]
 Next to custom namespace there are the names of countries according to ISO 3166. This corresponds with ccTLD (country code top-level domain).    
 Currently there are only european timezones supported.  
 
-* auto [default]--> usese the current client time-zone of the browser
-* GMT+0:00 --> uk, gb, pt (western europe)
-* GMT+1:00 --> de, fr, nl, it, es, at, ch, be, ... (central europe)
-* GMT+2:00 --> lt, gr, tr, ro, ... (eastern europe)
+* `auto` [default] --> usese the current client time-zone of the browser
+* `GMT+0:00 --> uk, gb, pt` (western europe)
+* `GMT+1:00 --> de, fr, nl, it, es, at, ch, be, ...` (central europe)
+* `GMT+2:00 --> lt, gr, tr, ro, ...` (eastern europe)
 
 ## 3 Examples
