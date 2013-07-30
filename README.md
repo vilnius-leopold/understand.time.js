@@ -70,19 +70,13 @@ Currently due to ease of development it still depends on jquery .
 **1 Include jQuery:** *(won't be neccessary in the futur)*  
 To do so include the following script tag into your HTML `<head>`-tag:  
 * either include the included jQuery library like this:  
-```html
-<script src="js/jquery.js"></script>
-```
+`<script src="js/jquery.js"></script>`
 **or**  
 * use the Google's hosted jQuery version like this:  
-```html
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-```
+`<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>`
 **2 Include understand.time.js:**  
 To do so include the following script tag into your HTML `<head>`-tag:  
-```html
-<script src="js/understand.time.js"></script>
-```
+`<script src="js/understand.time.js"></script>`
 **3 Enjoy:**  
 use it in your code like this:  
 ```javascript
