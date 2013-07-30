@@ -92,3 +92,9 @@ var computer_time = understand.time(human_time);
 alert('Computer time: ' + computer_time);
 ```
 ## 4 Examples
+
+Reference time is 'Wed Jul 31 2013 01:30:00 GMT+0300 (EEST)'
+
+understand.time('next fri 4pm'); //returns 'Fri Aug 09 2013 16:00:00 GMT+0300 (EEST)'
+
+understand.time('12:30 mo in 2 weeks'); //returns 'Mon Aug 19 2013 12:30:00 GMT+0300 (EEST)'

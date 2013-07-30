@@ -266,7 +266,7 @@ function test_weekday(test_string)
 	//compose regex
 	var imploded_weekdays = deep_implode(weekdays);
 
-	var weekday_pattern_string = "^\\s*(?:(?:this\\s+)|(next\\s+))?(?:" + imploded_weekdays + ")\\b";
+	var weekday_pattern_string = "^(?:\\s+|^\\b)(?:(?:this\\s+)|(next\\s+))?(?:" + imploded_weekdays + ")(?:\\s+|\\b$)";
 
 	var weekday_pattern = new RegExp(weekday_pattern_string, "i");
 
