@@ -16,7 +16,46 @@ var time_deviders = [':'];
 
 var imploded_time_deviders = implode(time_deviders);
 
+var timezones = {
+	GMT0: ['uk', 'gb', 'pt'],
+	GMT1: ['de', 'fr', 'cz', 'hr', 'be', 'at', 'hu', 'nl', 'no', 'pl', 'rs', 'se', 'ch', 'es', 'it', 'sk', 'si', 'dk'],
+	GMT2: ['lt', 'eg', 'bg', 'cy', 'ee', 'fi', 'gr', 'lv', 'md', 'ro', 'tr', 'ua']
+};
 
+function implode_timezones(timezones)
+{
+	var imploded_timezones = "";
+
+	var k = 0;
+	$.each(timezones,function(index, value){
+		if(k)
+		{
+			imploded_timezones += "|";
+		}
+		
+		imploded_timezones += "(";
+
+		var countries = value;
+		var countries_length = countries.length;
+
+		for(var i = 0; i < countries_length; i++)
+		{
+			if(i)
+			{
+				imploded_timezones += "|";
+			}
+
+			imploded_timezones += countries[i];
+		}
+
+		
+
+		imploded_timezones += ")";
+		k++;
+	});
+
+	return imploded_timezones;
+}
 
 function test_time(test_string)
 {
@@ -51,6 +90,20 @@ default_time_zone = default_time_zone.trim();
 if(default_time_zone == 'auto' || default_time_zone == '')
 {
 	default_time_zone = new Date().getTimezoneOffset();
+}
+
+function test_timezone(test_string)
+{
+	var imploded_timezones = implode_timezones(timezones);
+
+	var timezone_pattern_string = "(?:\\s+|^\\b)(?:" + imploded_timezones + ")(?:\\s+|\\b$)";
+
+	var timezone_pattern = new RegExp(timezone_pattern_string, "i");
+
+	console.log('pattern: ' + timezone_pattern);
+
+	var test_result = timezone_pattern.exec(test_string);
+	console.log('result: ' + test_result);
 }
 
 function test_date(test_string)
