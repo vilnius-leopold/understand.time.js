@@ -2,7 +2,7 @@ understand.time.js
 ====================
 
 understand.time.js is a js library that parses the human understanding of time to a computer readable time format.  
-For a better understanding what understand.time.js does view the [Examples](#3-examples) below.
+For a better understanding what understand.time.js does view the [Examples](#4-examples) below.
 
 ## 0. Latest Version:
  view the [changelog](https://github.com/vilnius-leopold/understand.time.js/blob/master/CHANGELOG.md).  
@@ -60,15 +60,14 @@ Currently there are only european timezones supported.
 
 ## 3 Usage
 
-**1 Dependencies:**  
+**Dependencies:**  
 understand.time.js is intended to be a stand-alone javascript library (with possible jQuery integration in the futur).  
 
 Currently due to ease of development it still depends on jquery .    
 
 * [jQuery](http://jquery.com/) *(this dependency will be remove in the futur!)*
   
-
-**2 Include jQuery:** *(won't be neccessary in the futur)*  
+**1 Include jQuery:** *(won't be neccessary in the futur)*  
 To do so include the following script tag into your HTML `<head>`-tag:  
 * either include the included jQuery library like this:  
 `<script src="js/jquery.js"></script>`  
@@ -76,13 +75,13 @@ To do so include the following script tag into your HTML `<head>`-tag:
 * use the Google's hosted jQuery version like this:  
 `<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>`
   
-
-**Include understand.time.js:**  
+**2 Include understand.time.js:**  
 To do so include the following script tag into your HTML `<head>`-tag:  
-* `<script src="js/understand.time.js"></script>`
-
+`<script src="js/understand.time.js"></script>`
+  
 **3 Enjoy:**  
 use it like this:  
-`var computer_time = understand.time(human_time);`
+    // 'human_time' is some user input time string e.g. 'next fri 4pm'
+    var computer_time = understand.time(human_time);
 
 ## 4 Examples
