@@ -4,11 +4,11 @@ var current_time = new Date();
 
 var default_hour = '18';
 var default_minute = '00';
-var default_day = current_time.getDay();
-var default_month = current_time.getMonth();
+var default_day = current_time.getDate();
+var default_month = current_time.getMonth() + 1;
 var default_year = current_time.getFullYear();
 
-var default_time_zone = 'auto'; //or lt, uk, de
+var default_time_zone = 'lt'; //auto or lt, uk, de
 
 var weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -24,11 +24,23 @@ var timezones = {
 	GMT2: ['lt']
 };
 
+summer_time = true;
+
 //--- END SETTINGS ---//
 
 var imploded_time_deviders = implode(time_deviders);
 
+//Setting time-zone
+default_time_zone = default_time_zone.trim();
 
+if(default_time_zone == 'auto' || default_time_zone == '')
+{
+	default_timezone_offset = new Date().getTimezoneOffset();
+}
+else
+{
+	default_timezone_offset = -240;
+}
 
 var weekday = null; 
 var day = null; 
@@ -37,9 +49,10 @@ var year = null;
 var hour = null; 
 var minute = null; 
 var timezone = null;
+var relative_days = 0;
 
 var time_found = false;
-
+var date_found = false;
 
 
 
@@ -118,13 +131,7 @@ function test_time(test_string)
 
 }
 
-//Setting time-zone
-default_time_zone = default_time_zone.trim();
 
-if(default_time_zone == 'auto' || default_time_zone == '')
-{
-	default_time_zone = new Date().getTimezoneOffset();
-}
 
 function test_timezone(test_string)
 {
@@ -138,7 +145,48 @@ function test_timezone(test_string)
 
 	var test_result = timezone_pattern.exec(test_string);
 	console.log('result: ' + test_result);
+
+	if(test_result != null)
+	{
+		test_result.shift();
+
+		var timezone_length = Object.size(timezones);
+		console.log('timezones: ' + timezone_length);
+		var timezone_offset = null;
+
+		for(var i = 0; i < timezone_length; i++)
+		{		
+			if(test_result[i] != '' && test_result[i] != undefined && test_result[i] != null)
+			{
+				timezone_offset = i;
+				if(summer_time)
+				{
+					timezone_offset++;
+				}
+				break;
+			}
+		}
+	}
+
+	if(timezone_offset == null)
+	{
+
+		timezone = 'GMT+0' + ((default_timezone_offset/-60) - 1) + '00';
+	}
+	else
+	{
+		timezone = 'GMT+0' + timezone_offset + '00';
+	}
+	
 }
+
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};
 
 function test_date(test_string)
 {
@@ -153,6 +201,13 @@ function test_date(test_string)
 	var test_result = literal_date_pattern.exec(test_string);
 	console.log('result: ' + test_result);
 
+	if(test_result != null)
+	{
+		day = test_result[1];
+		month = test_result[2];
+		year = test_result[3];
+	}
+
 	var imploded_months = deep_implode(months);
 
 	var numeric_date_pattern_string = "(?:\\s+|^\\b)(0?[1-9]|[1-2][0-9]|3[0-1])\\s?(?:" + implode(date_deviders) + ")\\s?(0?[1-9]|1[0-2])\\s?(?:" + implode(date_deviders) + ")\\s?(?:20)?(1[3-9]|[2-9][0-9])(?:\\s+|\\b$)";
@@ -163,6 +218,21 @@ function test_date(test_string)
 
 	var test_result = numeric_date_pattern.exec(test_string);
 	console.log('result: ' + test_result);
+
+	if(test_result != null)
+	{
+		day = test_result[1];
+		month = test_result[2];
+		year = test_result[3];
+	}
+
+	if( ! date_found)
+	{
+		day = default_day;
+		month = default_month;
+		year = default_year;
+	}
+
 }
 
 function test_in_weeks(test_string)
@@ -177,6 +247,8 @@ function test_in_weeks(test_string)
 
 	if(test_result != null)
 	{
+		relative_days += parseInt(test_result[1]) * 7;
+
 		return test_result[1];
 	}
 	else
@@ -194,7 +266,7 @@ function test_weekday(test_string)
 	//compose regex
 	var imploded_weekdays = deep_implode(weekdays);
 
-	var weekday_pattern_string = "^\\s*(next\\s+)?(?:" + imploded_weekdays + ")\\b";
+	var weekday_pattern_string = "^\\s*(?:(?:this\\s+)|(next\\s+))?(?:" + imploded_weekdays + ")\\b";
 
 	var weekday_pattern = new RegExp(weekday_pattern_string, "i");
 
@@ -211,23 +283,54 @@ function test_weekday(test_string)
 	
 
 	if(test_result != null)
-	{		
+	{
+		var is_next = false;
 
 		var result_length = test_result.length;
 		//remove first item from result array
 		test_result.shift();
-		test_result.shift();		
+		var next = test_result.shift();
+
+		console.log('NEXT: ' + next);
+
+		if(next != '' && next != null && next != undefined)
+		{
+			is_next = true;
+		}	
 
 		for(var i = 0; i < result_length; i++)
 		{
 			if(test_result[i] != '' && test_result[i] != undefined)
 			{
-				day_of_the_week = i;
+				day_of_the_week = i + 1;
 				break;
 			}		
 		}
 
 		console.log('Found day of the week: ' + day_of_the_week);
+
+		var current_weekday = current_time.getDay();
+
+		if(current_weekday == day_of_the_week)
+		{			
+			relative_days += 0;			
+		}
+		
+		if(current_weekday < day_of_the_week)
+		{
+			relative_days += day_of_the_week - current_weekday;
+		}
+
+		if(current_weekday > day_of_the_week)
+		{
+			relative_days += (7 - current_weekday) + day_of_the_week;			
+		}
+
+		if(is_next)
+		{
+			relative_days += 7;
+		}
+		
 	}
 
 
@@ -244,9 +347,7 @@ var understand = {
 		//start benchmark
 		var start_time = Date.now();
 
-		console.log('input: ' + human_time);
-
-		test_weekday(human_time);
+		console.log('input: ' + human_time);		
 			
 		test_time(human_time);
 
@@ -254,16 +355,21 @@ var understand = {
 
 		test_date(human_time);
 
+		test_weekday(human_time);
+
 		test_timezone(human_time);
 
-		var time_string = weekday + ", " + day + " " + month + " " + year +" " + hour +":" + minute + ":00 " + timezone;
+		var time_string = month + " " + (day + relative_days) +" " + year +" " + hour +":" + minute + ":00 " + timezone;
 
 		console.log(time_string);
 
-		var computer_time = Date.parse(time_string);
+
+		var computer_time = new Date(time_string);
 
 		//end benchmark
 		var end_time = Date.now();
+
+		relative_days = 0;
 
 		console.log('understood time in ' + ((end_time - start_time) / 1000).toFixed(3) + ' seconds!');
 
