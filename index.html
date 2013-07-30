@@ -90,40 +90,25 @@
 		// initial
 		understand_and_display();
 
-
 		// on click
-		$('button').click(function(){
-
+		$('button').click(function()
+		{
 			understand_and_display();
-
 		});
 
-		$('input[type="text"]').keypress(function(event){
-
-			 if ( event.which == 13 ) {
-			   understand_and_display();
-			 }
-
+		//on keypress ENTER
+		$('input[type="text"]').keypress(function(event)
+		{
+			if ( event.which == 13 ) {				
+				understand_and_display();
+			}
 		});
-
 
 		function understand_and_display()
-		{
+		{			
 			var human_time = $('input[name="human_time"]').val();
-			//console.log(human_time);
-			
-			//test_weekday(human_time);
-			
-			//test_time(human_time);
-
-			//test_in_weeks(human_time);
-			//test_date(human_time);
-
-			test_timezone(human_time);
 
 			var computer_time = understand.time(human_time);
-
-			//console.log(computer_time);
 
 			$('code#computer_time').html(computer_time);
 		}		
