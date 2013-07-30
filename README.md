@@ -4,6 +4,10 @@ understand.time.js
 understand.time.js is a js library that parses the human understanding of time to a computer readable time format.  
 For a better understanding what understand.time.js does view the [Examples](#3-examples) below.
 
+## 0. Latest Version:
+ view the [changelog](https://github.com/vilnius-leopold/understand.time.js/blob/master/CHANGELOG.md).  
+ * still in development - version 1.0 coming soon
+
 ## 1. Supported languages: 
 * English
 

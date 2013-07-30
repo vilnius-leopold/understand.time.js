@@ -53,6 +53,31 @@ if(default_time_zone == 'auto' || default_time_zone == '')
 	default_time_zone = new Date().getTimezoneOffset();
 }
 
+function test_date(test_string)
+{
+	var imploded_months = deep_implode(months);
+
+	var literal_date_pattern_string = "(?:\\s+|^\\b)(1(?=st)|2(?=nd)|3(?=rd)|[4-9](?=th)|1[0-9](?=th)|20(?=th)|21(?=st)|22(?=nd)|23(?=rd)|2[4-9](?=th)|30(?=th)|31(?=st)|32(?=nd)|0?[1-9](?=\\.)|[1-2][0-9](?=\\.)|3[0-2](?=\\.))(?:nd|st|th|\\.)\\s+(?:" + imploded_months + ")\\s+(?:20|')(1[3-9]|[2-9][0-9])(?:\\s+|\\b$)";
+
+	var literal_date_pattern = new RegExp(literal_date_pattern_string, "i");
+
+	console.log('pattern: ' + literal_date_pattern);
+
+	var test_result = literal_date_pattern.exec(test_string);
+	console.log('result: ' + test_result);
+
+	var imploded_months = deep_implode(months);
+
+	var numeric_date_pattern_string = "(?:\\s+|^\\b)(0?[1-9]|[1-2][0-9]|3[0-1])\\s?(?:" + implode(date_deviders) + ")\\s?(0?[1-9]|1[0-2])\\s?(?:" + implode(date_deviders) + ")\\s?(?:20)?(1[3-9]|[2-9][0-9])(?:\\s+|\\b$)";
+
+	var numeric_date_pattern = new RegExp(numeric_date_pattern_string, "i");
+
+	console.log('pattern: ' + numeric_date_pattern);
+
+	var test_result = numeric_date_pattern.exec(test_string);
+	console.log('result: ' + test_result);
+}
+
 function test_in_weeks(test_string)
 {
 	console.log('input: ' + test_string);
