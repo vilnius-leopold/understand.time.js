@@ -4,16 +4,16 @@ understand.time.js
 understand.time.js is a js library that parses the human understanding of time to a computer readable time format.  
 For a better understanding what understand.time.js does view the [Examples](#4-examples) below.
 
-## 0. Latest Version:
+## 0 Latest Version:
  view the [changelog](https://github.com/vilnius-leopold/understand.time.js/blob/master/CHANGELOG.md).  
  * still in development - version 1.0 coming soon
 
-## 1. Supported languages: 
+## 1 Supported languages: 
 * English
 
 (German and Lithuanian will be added later)
 
-## 2. Recognised Inputs
+## 2 Recognised Inputs
 
 It recognises complete or non-ambigious abriviations of the following type:
 
@@ -80,8 +80,15 @@ To do so include the following script tag into your HTML `<head>`-tag:
 `<script src="js/understand.time.js"></script>`
   
 **3 Enjoy:**  
-use it like this:  
-    // 'human_time' is some user input time string e.g. 'next fri 4pm'
-    var computer_time = understand.time(human_time);
+use it in your code like this:  
+```javascript
+//your input time
+var human_time = 'next fri 4pm';
 
+//where the magic happens ;)
+var computer_time = understand.time(human_time);
+
+//output the magic
+alert('Computer time: ' + computer_time);
+```
 ## 4 Examples
