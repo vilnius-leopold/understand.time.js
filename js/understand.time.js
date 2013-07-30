@@ -53,6 +53,26 @@ if(default_time_zone == 'auto' || default_time_zone == '')
 	default_time_zone = new Date().getTimezoneOffset();
 }
 
+function test_in_weeks(test_string)
+{
+	console.log('input: ' + test_string);
+	var in_weeks_pattern_string = "(?:\\s+|^\\b)in\\s+(\\d{1,2})\\s+weeks?(?:\\s+|\\b$)";
+
+	var in_weeks_pattern = new RegExp(in_weeks_pattern_string, "i");
+
+	var test_result = in_weeks_pattern.exec(test_string);
+	console.log('result: ' + test_result);
+
+	if(test_result != null)
+	{
+		return test_result[1];
+	}
+	else
+	{
+		return null;
+	}
+}
+
 ////////////////////
 //--- WEEKDAYS ---//
 function test_weekday(test_string)
@@ -62,7 +82,7 @@ function test_weekday(test_string)
 	//compose regex
 	var imploded_weekdays = deep_implode(weekdays);
 
-	var weekday_pattern_string = "^\\s*(?:" + imploded_weekdays + ")\\b";
+	var weekday_pattern_string = "^\\s*(next\\s+)?(?:" + imploded_weekdays + ")\\b";
 
 	var weekday_pattern = new RegExp(weekday_pattern_string, "i");
 
@@ -83,6 +103,7 @@ function test_weekday(test_string)
 
 		var result_length = test_result.length;
 		//remove first item from result array
+		test_result.shift();
 		test_result.shift();		
 
 		for(var i = 0; i < result_length; i++)

@@ -110,15 +110,17 @@
 		function understand_and_display()
 		{
 			var human_time = $('input[name="human_time"]').val();
-			console.log(human_time);
+			//console.log(human_time);
 			
-			test_weekday(human_time);
+			//test_weekday(human_time);
 			
-			test_time(human_time);
+			//test_time(human_time);
+
+			test_in_weeks(human_time);
 
 			var computer_time = understand.time(human_time);
 
-			console.log(computer_time);
+			//console.log(computer_time);
 
 			$('code#computer_time').html(computer_time);
 		}		
