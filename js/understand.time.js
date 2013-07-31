@@ -112,7 +112,6 @@ var time_found = false;
 var date_found = false;
 
 
-
 function test_time(test_string)
 {
 	console.log('testing time!');
