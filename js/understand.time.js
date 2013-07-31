@@ -4,9 +4,10 @@ var current_time = new Date();
 
 var default_hour = '18';
 var default_minute = '00';
-var default_day = current_time.getDate();
-var default_month = current_time.getMonth() + 1;
-var default_year = current_time.getFullYear();
+var default_day = current_time.getUTCDate();
+var default_month = current_time.getUTCMonth() + 1;
+var default_year = current_time.getUTCFullYear();
+var default_seconds = '00';
 
 var default_time_zone = 'lt'; //auto or lt, uk, de
 
@@ -19,17 +20,39 @@ var date_deviders = ['.', '-', '/'];
 var time_deviders = [':'];
 
 var timezones = {
-	GMT0: ['uk', 'en'],
-	GMT1: ['de', 'fr', 'cz', 'hr', 'be', 'at', 'hu', 'nl', 'no', 'pl', 'rs', 'se', 'ch', 'es', 'it', 'sk', 'si', 'dk'],
-	GMT2: ['lt']
+	'UTC+00:00': {
+		DST: ['uk', 'en'], 
+		noDST: []
+	},
+	'UTC+01:00': {
+		DST: ['de', 'fr', 'cz', 'hr', 'be', 'at', 'hu', 'nl', 'no', 'pl', 'rs', 'se', 'ch', 'es', 'it', 'sk', 'si', 'dk'], 
+		noDST: []
+	},
+	'UTC+02:00': {
+		DST: ['lt'], 
+		noDST: []
+	}
 };
 
-var summer_time = true;
+var is_summer_time = true;
 var run_benchmark = true;
 
 
 //--- END SETTINGS ---//
 
+
+var weekday = null; 
+var day = null; 
+var month = null; 
+var year = null; 
+var hour = null; 
+var minute = null;
+var seconds = null;
+var timezone = null;
+var relative_days = 0;
+
+var time_found = false;
+var date_found = false;
 
 /**
  * Date tests:
@@ -84,10 +107,16 @@ var run_benchmark = true;
  *  
  * 
  */
+function get_seconds(test_string)
+{	
+	seconds = default_seconds;
+	
+	console.log('SECONDS: ' + seconds);
+}
 
 function get_minute(test_string)
 {	
-	var minute = default_minute;
+	minute = default_minute;
 
 	//tests 24h and am_pm pattern
 	var minute_pattern_string = "(?:\\s+|^\\b)(?:(?:0?[0-9]|1[0-9]|2[0-4])(?=.\\d{2}\\s*(?!(?:am|pm)))|(?:0?[0-9]|1[0-2])(?=.\\d{2}(?:am|pm)))(?:" + imploded_time_deviders + ")([0-5][0-9])\\s*(?:am|pm|h|\\s*)(?:\\s+|\\b$)";
@@ -105,7 +134,7 @@ function get_minute(test_string)
 
 function get_hour(test_string)
 {
-	var hour = default_hour;
+	hour = default_hour;
 
 	//tests 24h and am_pm pattern
 	var hour_pattern_string = "(?:\\s+|^\\b)((?:0?[0-9]|1[0-9]|2[0-4])(?=.\\d{2}\\s*(?!(?:am|pm)))|(?:0?[0-9]|1[0-2])(?=.\\d{2}(?:am|pm)))(?:" + imploded_time_deviders + ")(?:[0-5][0-9])?\\s*(?:am|pm|h|\\s*)(?:\\s+|\\b$)";
@@ -120,7 +149,62 @@ function get_hour(test_string)
 	console.log('HOUR: ' + hour);
 }
 
+function get_time_keyword(test_string)
+{
 
+}
+
+function get_date_keyword(test_string)
+{
+
+}
+
+function get_timezone(test_string)
+{
+	var imploded_timezones = implode_timezones(timezones);
+
+	var timezone_pattern_string = "(?:\\s+|^\\b)(?:" + imploded_timezones + ")(?:\\s+|\\b$)";
+
+	var timezone_pattern = new RegExp(timezone_pattern_string, "i");
+
+	console.log('pattern: ' + timezone_pattern);
+
+	var test_result = timezone_pattern.exec(test_string);
+	console.log('result: ' + test_result);
+
+	if(test_result != null)
+	{
+		test_result.shift();
+
+		var timezone_length = Object.size(timezones);
+		console.log('timezones: ' + timezone_length);
+		var timezone_offset = null;
+
+		for(var i = 0; i < timezone_length; i++)
+		{		
+			if(test_result[i] != '' && test_result[i] != undefined && test_result[i] != null)
+			{
+				timezone_offset = i;
+				if(is_summer_time)
+				{
+					timezone_offset++;
+				}
+				break;
+			}
+		}
+	}
+
+	if(timezone_offset == null)
+	{
+
+		timezone = 'GMT+0' + ((default_timezone_offset/-60) - 1) + '00';
+	}
+	else
+	{
+		timezone = 'GMT+0' + timezone_offset + '00';
+	}
+	
+}
 
 var imploded_time_deviders = implode(time_deviders);
 
@@ -136,17 +220,7 @@ else
 	default_timezone_offset = -240;
 }
 
-var weekday = null; 
-var day = null; 
-var month = null; 
-var year = null; 
-var hour = null; 
-var minute = null; 
-var timezone = null;
-var relative_days = 0;
 
-var time_found = false;
-var date_found = false;
 
 
 
@@ -253,7 +327,7 @@ function test_timezone(test_string)
 			if(test_result[i] != '' && test_result[i] != undefined && test_result[i] != null)
 			{
 				timezone_offset = i;
-				if(summer_time)
+				if(is_summer_time)
 				{
 					timezone_offset++;
 				}
@@ -443,6 +517,7 @@ var understand = {
 			//start benchmark
 			var start_time = Date.now();
 		}
+		/*
 		console.log('input: ' + human_time);		
 			
 		test_time(human_time);
@@ -458,11 +533,17 @@ var understand = {
 		var time_string = month + " " + (day + relative_days) +" " + year +" " + hour +":" + minute + ":00 " + timezone;
 
 		console.log(time_string);
-
+		*/
 		get_minute(human_time);
 		get_hour(human_time);
+		get_seconds(human_time);
+		get_timezone(human_time);
 
-		var computer_time = new Date(time_string);
+		//var computer_time = new Date(time_string);
+
+		var computer_time =  hour + " " + minute + " " + seconds + " " + timezone;
+
+		console.log(computer_time);
 
 		//reset relative days;
 		relative_days = 0;
@@ -563,8 +644,23 @@ function implode_timezones(timezones)
 		
 		imploded_timezones += "(";
 
-		var countries = value;
+		//DST countries
+		var countries = value.DST;
 		var countries_length = countries.length;
+
+		for(var i = 0; i < countries_length; i++)
+		{
+			if(i)
+			{
+				imploded_timezones += "|";
+			}
+
+			imploded_timezones += countries[i];
+		}
+
+		//NoDST countries
+		countries = value.noDST;
+		countries_length = countries.length;
 
 		for(var i = 0; i < countries_length; i++)
 		{
@@ -582,5 +678,6 @@ function implode_timezones(timezones)
 		k++;
 	});
 
+	console.log(imploded_timezones);
 	return imploded_timezones;
 }
