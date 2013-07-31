@@ -85,6 +85,43 @@ var run_benchmark = true;
  * 
  */
 
+function get_minute(test_string)
+{	
+	var minute = default_minute;
+
+	//tests 24h and am_pm pattern
+	var minute_pattern_string = "(?:\\s+|^\\b)(?:(?:0?[0-9]|1[0-9]|2[0-4])(?=.\\d{2}\\s*(?!(?:am|pm)))|(?:0?[0-9]|1[0-2])(?=.\\d{2}(?:am|pm)))(?:" + imploded_time_deviders + ")([0-5][0-9])\\s*(?:am|pm|h|\\s*)(?:\\s+|\\b$)";
+
+	var found = test_string.match(minute_pattern_string);
+
+	if(found != null)
+	{
+		minute = found[1];
+
+	}
+	
+	console.log('MINUTE: ' + minute);
+}
+
+function get_hour(test_string)
+{
+	var hour = default_hour;
+
+	//tests 24h and am_pm pattern
+	var hour_pattern_string = "(?:\\s+|^\\b)((?:0?[0-9]|1[0-9]|2[0-4])(?=.\\d{2}\\s*(?!(?:am|pm)))|(?:0?[0-9]|1[0-2])(?=.\\d{2}(?:am|pm)))(?:" + imploded_time_deviders + ")(?:[0-5][0-9])?\\s*(?:am|pm|h|\\s*)(?:\\s+|\\b$)";
+
+	var found = test_string.match(hour_pattern_string);
+	
+	if(found != null)
+	{
+		hour = found[1];
+	}
+
+	console.log('HOUR: ' + hour);
+}
+
+
+
 var imploded_time_deviders = implode(time_deviders);
 
 //Setting time-zone
@@ -110,6 +147,7 @@ var relative_days = 0;
 
 var time_found = false;
 var date_found = false;
+
 
 
 function test_time(test_string)
@@ -421,6 +459,8 @@ var understand = {
 
 		console.log(time_string);
 
+		get_minute(human_time);
+		get_hour(human_time);
 
 		var computer_time = new Date(time_string);
 
