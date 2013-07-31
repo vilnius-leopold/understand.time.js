@@ -24,9 +24,66 @@ var timezones = {
 	GMT2: ['lt']
 };
 
-summer_time = true;
+var summer_time = true;
+var run_benchmark = true;
+
 
 //--- END SETTINGS ---//
+
+
+/**
+ * Date tests:
+ * 	01.02(.)
+ * 	01-02
+ * 	01/02/(20)13
+ * 	1(.) F(ebruary) (2013)
+ *  1.  --> upcomming relative from now
+ *  1st --> upcomming relative from now
+ *  F(ebruary) 1(.) (2013)
+ *  F(ebruary) 1st (2013)
+ *  1st (F(ebruary) (2013))
+ *  t(oday)
+ *  t(omorrow)
+ *  in/+ 2 d(ays)
+ *  in/+ 2 w(eeks)
+ *  in/+ 2 m(onths)
+ *  in/+ 2 y(ears)
+ *  next f(riday)
+ *  (this) f(riday)
+ *  f(riday) in/+ 2 weeks
+ *
+ * Time tests:
+ *  1am
+ *  4pm
+ *  1:30am
+ *  1:30(h/o'clock)
+ *  01:30(h)/am/pm
+ *  0130 --> military time
+ *  0100
+ *  0100(h)
+ *  noon --> dependent on settings 12:00
+ *  midnight --> dependent on settings 24:00
+ *  morning --> dependent on settings 9:00
+ *  afternoon --> dependent on settings 16:00
+ *  evening --> dependent on settings 18:00
+ *  (today/tomorrow) --> dependent on settings (end of workday 18:00)
+ *  after lunch --> dependent on settings 15:00
+ *  before lunch --> dependent on settings 13:00
+ *  in 2 hours
+ *  in 2 minutes
+ *  
+ *
+ * Timezone tests:
+ * 	uk
+ * 	de
+ * 	lt
+ * 	GMT(+)(0)3(:)(00)
+ * 	UTC(+)(0)3(:)(00)
+ * 	
+ * 
+ *  
+ * 
+ */
 
 var imploded_time_deviders = implode(time_deviders);
 
@@ -344,9 +401,11 @@ var understand = {
 	//time function
 	time: function(human_time){
 
-		//start benchmark
-		var start_time = Date.now();
-
+		if(run_benchmark)
+		{
+			//start benchmark
+			var start_time = Date.now();
+		}
 		console.log('input: ' + human_time);		
 			
 		test_time(human_time);
@@ -366,12 +425,16 @@ var understand = {
 
 		var computer_time = new Date(time_string);
 
-		//end benchmark
-		var end_time = Date.now();
-
+		//reset relative days;
 		relative_days = 0;
 
-		console.log('understood time in ' + ((end_time - start_time) / 1000).toFixed(3) + ' seconds!');
+		if(run_benchmark)
+		{
+			//end benchmark
+			var end_time = Date.now();	
+
+			console.log('understood time in ' + ((end_time - start_time) / 1000).toFixed(3) + ' seconds!');
+		}
 
 		return computer_time;
 	}
