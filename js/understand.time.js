@@ -34,12 +34,15 @@ var timezones = {
 	}
 };
 
-var is_summer_time = true;
+
 var run_benchmark = true;
 
 
 //--- END SETTINGS ---//
 
+
+//--- VARIABLES ---//
+var is_summer_time = true;
 
 var weekday = null; 
 var day = null; 
@@ -107,6 +110,11 @@ var date_found = false;
  *  
  * 
  */
+
+var imploded_date_deviders = implode(date_deviders);
+var imploded_months = deep_implode(months);
+var imploded_hidden_months = deep_implode(months, '|', '(?:', ')', '?')
+
 function get_seconds(test_string)
 {	
 	seconds = default_seconds;
@@ -148,6 +156,117 @@ function get_hour(test_string)
 
 	console.log('HOUR: ' + hour);
 }
+/*
+ * Date tests:
+ * 	01.02(.)
+ * 	01-02
+ * 	01/02/(20)13
+ * 	1(.) F(ebruary) (2013)
+ *  1.  --> upcomming relative from now
+ *  1st --> upcomming relative from now
+ *  F(ebruary) 1(.) (2013)
+ *  F(ebruary) 1st (2013)
+ *  1st (F(ebruary) (2013))
+ *  t(oday)
+ *  t(omorrow)
+ *  in/+ 2 d(ays)
+ *  in/+ 2 w(eeks)
+ *  in/+ 2 m(onths)
+ *  in/+ 2 y(ears)
+ *  next f(riday)
+ *  (this) f(riday)
+ *  f(riday) in/+ 2 weeks
+ */
+function get_day(test_string)
+{
+	day = default_day;
+
+	//tests 24h and am_pm pattern
+	/*
+	var day_pattern_string = "(?:\\s+|^\\b)((?:(?:1|21|31)(?=st)|(?:2|22)(?=nd)|(?:3|23)(?=rd)|(?:[4-9]|1[0-9]|20|2[4-9]|30)(?=th)|(?:0?[1-9]|[1-2][0-9]|3[0-2]|)(?=\\.))(?:nd|st|th|\\.)(?:\\s+(?:" + imploded_months + ")(?:\\s+(?:20|')(1[3-9]|[2-9][0-9]))?)?)(?:\\s+|\\b$)";
+	*/
+
+	var day_pattern_string = "((?:(?:1|21|31)(?=st)|(?:2|22)(?=nd)|(?:3|23)(?=rd)|(?:[4-9]|1[0-9]|20|2[4-9]|30)(?=th)|(?:0?[1-9]|[12][0-9]|3[0-2])(?=\\.))(?=\\s+(?:" + imploded_months + ")(?=\\s+(?:20|')(?:1[3-9]|[2-9][0-9]))?)?|(?:0?[1-9]|[12][0-9]|3[01])(?=[-/\\.](?:0?[1-9]|1[0-2])[-/\\.]?(?:(?:20)?(?:1[3-9]|[2-9][0-9]))?))";
+
+	console.log(day_pattern_string);
+
+	/* literal
+	
+	 */
+	/*numeric
+	(?:\\s+|^\\b)(0?[1-9]|[1-2][0-9]|3[0-1])\\s?(?:" + implode(date_deviders) + ")\\s?(0?[1-9]|1[0-2])\\s?(?:" + implode(date_deviders) + ")\\s?(?:20)?(1[3-9]|[2-9][0-9])(?:\\s+|\\b$)
+	*/
+
+	var found = test_string.match(day_pattern_string);
+	
+	console.log('DAY: ' + found);
+
+	if(found != null)
+	{
+		day = found[1];
+	}
+
+	console.log('DAY: ' + day);
+}
+
+function get_month(test_string)
+{
+	month = default_month;
+
+	var month_pattern_string = "(?=(?:\\s+|\\b))(?:(?:0?[1-9]|[12][0-9]|3[01])(?:[-/\\.](0?[1-9]|1[0-2])[-/\\.]?(?:(?:20)?(?:1[3-9]|[2-9][0-9]))?)|(?:(?:(?:1|21|31)st|(?:2|22)nd|(?:3|23)rd|(?:[4-9]|1[0-9]|20|2[4-9]|30)th|(?:0?[1-9]|[12][0-9]|3[0-2])\\.)\\s+)(?:" + imploded_months + "))(?=\\s+|\\b)";
+
+	var month_pattern = new RegExp(month_pattern_string, 'i');
+
+	var found = month_pattern.exec(test_string);
+
+	if(found != null)
+	{
+		console.log('MONTH found: ' + found);
+		
+		for(var i = 1; i < 14; i++)
+		{
+			found_month = found[i];
+			if(found_month != null && found_month != '' && found_month != undefined)
+			{
+				console.log('found int : ' + i);
+
+				if(i == 1)
+				{
+					month = found[i];
+				}
+				else
+				{
+					month = i - 1;
+				}
+
+				break;
+			}
+		}
+	}
+	
+}
+
+function get_year(test_string)
+{
+	year = default_year;
+
+	var year_pattern_string = "(?=(?:\\s+|\\b))(?:(?:0?[1-9]|[12][0-9]|3[01])(?:[-/\\.](?:0?[1-9]|1[0-2])[-/\\.]?(?:(?:20)?(1[3-9]|[2-9][0-9])))|(?:(?:(?:1|21|31)st|(?:2|22)nd|(?:3|23)rd|(?:[4-9]|1[0-9]|20|2[4-9]|30)th|(?:0?[1-9]|[12][0-9]|3[0-2])\\.)\\s+)(?:" + imploded_hidden_months + ")(?:\\s+(?:20|')(1[3-9]|[2-9][0-9])))(?=\\s+|\\b)";
+
+	var year_pattern = new RegExp(year_pattern_string, 'i');
+
+	var found = year_pattern.exec(test_string);
+
+	console.log('year found: ' + found);
+
+	if(found != null)
+	{
+		console.log('year found: ' + found);		
+		
+		year = '20' + ((found[1] !== undefined && found[1] !== '' && found[1] !== null) ? found[1] : found[2]);
+			
+	}
+	
+}
 
 function get_time_keyword(test_string)
 {
@@ -184,7 +303,7 @@ function get_timezone(test_string)
 		{		
 			if(test_result[i] != '' && test_result[i] != undefined && test_result[i] != null)
 			{
-				timezone_offset = i;
+				timezone_offset = i/2;
 				if(is_summer_time)
 				{
 					timezone_offset++;
@@ -537,11 +656,14 @@ var understand = {
 		get_minute(human_time);
 		get_hour(human_time);
 		get_seconds(human_time);
+		get_day(human_time);
+		get_month(human_time);
+		get_year(human_time);
 		get_timezone(human_time);
 
 		//var computer_time = new Date(time_string);
 
-		var computer_time =  hour + " " + minute + " " + seconds + " " + timezone;
+		var computer_time =  hour + ":" + minute + ":" + seconds + " " + day + "/" + month + "/" + year + " " + timezone;
 
 		console.log(computer_time);
 
@@ -642,12 +764,13 @@ function implode_timezones(timezones)
 			imploded_timezones += "|";
 		}
 		
-		imploded_timezones += "(";
+		imploded_timezones += "(?:";
 
 		//DST countries
 		var countries = value.DST;
 		var countries_length = countries.length;
 
+		imploded_timezones += "(";
 		for(var i = 0; i < countries_length; i++)
 		{
 			if(i)
@@ -657,11 +780,13 @@ function implode_timezones(timezones)
 
 			imploded_timezones += countries[i];
 		}
+		imploded_timezones += ")";
 
 		//NoDST countries
 		countries = value.noDST;
 		countries_length = countries.length;
 
+		imploded_timezones += "|(";
 		for(var i = 0; i < countries_length; i++)
 		{
 			if(i)
@@ -671,7 +796,7 @@ function implode_timezones(timezones)
 
 			imploded_timezones += countries[i];
 		}
-
+		imploded_timezones += ")";
 		
 
 		imploded_timezones += ")";
