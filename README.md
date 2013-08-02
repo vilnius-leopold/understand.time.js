@@ -2,7 +2,9 @@ understand.time.js
 ====================
 
 `understand.time.js` is a js library that parses the human understanding of time to a computer readable time format.  
-For a better understanding what `understand.time.js` does view the [Examples](#4-examples) below.
+For a better understanding what `understand.time.js` does view the [Examples](#4-examples) below.  
+This is still code in progress. Please ***get involved*** if you're interested!  
+To get a better idea where this code project is supposed to go take a look at the [wiki](https://github.com/vilnius-leopold/understand.time.js/wiki).
 
 ## 0 Latest Version:
  view the [changelog](https://github.com/vilnius-leopold/understand.time.js/blob/master/CHANGELOG.md).  

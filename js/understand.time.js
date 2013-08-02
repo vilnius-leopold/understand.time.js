@@ -53,7 +53,8 @@ var minute = null;
 var seconds = null;
 var timezone = null;
 var relative_days = 0;
-
+var timezone_offset_hour = 0;
+var timezone_offset_minute = 0;
 var time_found = false;
 var date_found = false;
 
@@ -317,10 +318,12 @@ function get_timezone(test_string)
 	{
 
 		timezone = 'GMT+0' + ((default_timezone_offset/-60) - 1) + '00';
+		timezone_offset_hour = (default_timezone_offset/-60) - 1;
 	}
 	else
 	{
 		timezone = 'GMT+0' + timezone_offset + '00';
+		timezone_offset_hour = timezone_offset;
 	}
 	
 }
@@ -663,9 +666,19 @@ var understand = {
 
 		//var computer_time = new Date(time_string);
 
-		var computer_time =  hour + ":" + minute + ":" + seconds + " " + day + "/" + month + "/" + year + " " + timezone;
+		debug_time =  hour + ":" + minute + ":" + seconds + " " + day + "/" + month + "/" + year + " " + timezone;
 
-		console.log(computer_time);
+		console.log('DEBUG: ' + debug_time);
+
+		var local_time_obj = new Date(year, month - 1, day, hour, minute, seconds);
+
+		//console.log('Iso-String: ' + local_time_obj.toISOString());
+
+		//console.log('Local-String: ' + local_time_obj.toLocaleString());
+
+		//console.log('Locale-TimeString: ' + local_time_obj.toLocaleTimeString());
+
+		computer_time = local_time_obj.toLocaleString();
 
 		//reset relative days;
 		relative_days = 0;
