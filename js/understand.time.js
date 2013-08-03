@@ -45,7 +45,7 @@ var run_benchmark = true;
 var is_summer_time = true;
 
 var weekday = null; 
-var day = null; 
+var day = 0;
 var month = null; 
 var year = null; 
 var hour = null; 
@@ -114,6 +114,7 @@ var date_found = false;
 
 var imploded_date_deviders = implode(date_deviders);
 var imploded_months = deep_implode(months);
+var imploded_weekdays = deep_implode(weekdays);
 var imploded_hidden_months = deep_implode(months, '|', '(?:', ')', '?')
 
 function get_seconds(test_string)
@@ -210,6 +211,11 @@ function get_day(test_string)
 	console.log('DAY: ' + day);
 }
 
+function get_relative_day()
+{
+
+}
+
 function get_month(test_string)
 {
 	month = default_month;
@@ -269,15 +275,7 @@ function get_year(test_string)
 	
 }
 
-function get_time_keyword(test_string)
-{
 
-}
-
-function get_date_keyword(test_string)
-{
-
-}
 
 function get_timezone(test_string)
 {
@@ -765,6 +763,235 @@ function deep_implode(item_array, devider, prefix, suffix, segmentation)
 
 	return imploded_items;
 }
+
+date_found = false;
+date_add_found = false;
+time_found = false;
+time_add_found = false;
+
+var patterns = {
+	date: [
+		{	// 12th Feb 2014
+			pattern: "(?:\\s+|^\\b)((?:1|21|31)(?=st)|(?:2|22)(?=nd)|(?:3|23)(?=rd)|(?:[4-9]|1[0-9]|2[04-9]|)(?=th)|(?:0?[1-9]|[1-2][0-9]|3[0-2])(?=\\.))(?:nd|st|th|\\.)(?:\\s+(?:" + imploded_months + ")(?:\\s+(?:20|')(1[3-9]|[2-9][0-9]))?)?(?:\\s+|\\b$)",
+			actions:{
+				'1': 	function(index, value){ day = value; },
+				'2-13': function(index, value){ month = parseInt(index) - 1; },
+				'14': 	function(index, value){ year = '20' + value; }
+			}
+		},
+		{
+			pattern: "(?:\\s+|^\\b)(0?[1-9]|[1-2][0-9]|3[0-1])\\s?(?:" + implode(date_deviders) + ")\\s?(0?[1-9]|1[0-2])(?:\\s?(?:" + implode(date_deviders) + ")\\s?(?:20)?(1[3-9]|[2-9][0-9]))?(?:\\s+|\\b$)",
+			actions:{
+				'1': function(index, value){ day = value; },
+				'2': function(index, value){ month = value; },
+				'3': function(index, value){ year = '20' + value; }
+			}
+		},
+		{
+			pattern: "(?:\\s+|^\\b)(?:(?:this\\s+)|(next\\s+))?(?:" + imploded_weekdays + ")(?:\\s+|\\b$)",
+			actions:{
+				'1': function(index, value){ day = parseInt(day) + 7; },
+				'2-8': function(index, value){
+
+					var day_of_the_week = index - 2;
+
+					var current_date = new Date();
+
+					var current_weekday = current_date.getDay();
+
+					day = parseInt(day) + current_date.getDate() + 1;
+										
+					if(current_weekday < day_of_the_week)
+					{
+						day += day_of_the_week - current_weekday;
+					}
+
+					if(current_weekday > day_of_the_week)
+					{
+						day += (7 - current_weekday) + day_of_the_week;			
+					}
+
+					month = current_date.getMonth() + 1;
+					year = current_date.getFullYear();
+				}
+			}
+		}
+	],
+	date_add: [
+		{
+			//
+			pattern: "(?:\\s+|^\\b)(?:in|\\+)(?=\\s+\\d{1,2}\\s+\\w{1,}){1,5}(?:\\s+(\\d{1,2})\\s+ye?a?r?s?)?(?:\\s+(\\d{1,2})\\s+mo?n?t?h?s?)?(?:\\s+(\\d{1,2})\\s+we?e?k?s?)?(?:\\s+(\\d{1,2})\\s+da?y?s?)?(?:\\s+|\\b$)",
+			actions:{
+				'1': function(index, value){ console.log('found year: +' + value); year = parseInt(year) + parseInt(value); },
+				'2': function(index, value){ month = parseInt(month) + parseInt(value); },
+				'3': function(index, value){ day = parseInt(day) + parseInt(value) * 7; },
+				'4': function(index, value){ day = parseInt(day) + parseInt(value); }
+			}
+		}
+	],
+	time: [
+		{
+			pattern: "somepattern",
+			actions:{
+				'1': function(index,value){
+					//do this
+				},
+				'2-14': function(index,value){
+					//do that
+				},
+				'15': function(index,value){
+					//do that
+				}
+			}
+		}
+	],
+	time_add: [
+		{
+			pattern: "somepattern",
+			actions:{
+				'1': function(index,value){
+					//do this
+				},
+				'2-13': function(index,value){
+					//do that
+				},
+				'14': function(index,value){
+					//do that
+				}
+			}
+		}
+	]
+};
+
+function test_patterns(test_string, pattern_object){
+
+	var start_time = Date.now();
+
+	$.each(pattern_object, function(index, value){
+		
+		var pattern_group_name = index;
+
+		console.log('Inside: ' + pattern_group_name);
+
+		var pattern_group = value;
+
+		$.each(pattern_group, function(index, value){
+
+			//console.log('Inside: ' + index);
+
+			var single_pattern_obj = value;
+
+			var pattern_string = single_pattern_obj.pattern;
+
+			//console.log('Pattern: ' + pattern_string);
+
+			var pattern = new RegExp(pattern_string, "i");
+
+			var test_result = pattern.exec(test_string);
+
+
+
+			if(test_result !== null )
+			{
+				console.log('Result: ' + test_result);
+
+				//console.log('date_found? ' + date_found);
+
+				var ex_string = pattern_group_name + "_found = true";
+
+				//console.log('ex_string: ' + ex_string);
+
+				eval(ex_string);
+
+				//console.log('date_found? ' + date_found);
+
+				//console.log('!!!TEST RESULT length: ' + test_result.length);
+				//console.log('!!!TEST RESULT: ' + test_result);
+
+				var actions = single_pattern_obj.actions;
+
+				$.each(actions, function(index, value){
+					var action = value;
+					console.log('Action: ' + index);
+
+
+					//Metadata
+					var meta_data_string = index;
+
+					var meta_pattern = /(\d{1,2})(?:-(\d{1,2}))?/i;
+
+					var meta_data = meta_pattern.exec(meta_data_string);
+
+					//console.log('META DATA: ' + meta_data);
+					
+					var start_index = (meta_data[1] !== '' && meta_data[1] !== null) ? meta_data[1] : null;
+					start_index = parseInt(start_index);
+
+					var end_index = (meta_data[2] !== '' && meta_data[2] !== null) ? meta_data[2] : null;
+					//end_index = parseInt(end_index);
+
+					//console.log('START END: ' + start_index + ' ' + end_index);
+
+					//Test pattern
+					
+					var current_index = null;
+					
+
+					if(end_index === null || end_index === undefined)
+					{
+						current_index = start_index;
+
+						var current_value = test_result[start_index];
+
+						//console.log('!!!current value: ' + current_value);					
+					}
+					else
+					{
+						//console.log('BEFORE the LOOP');
+						//console.log('START END: ' + start_index + ' ' + end_index);
+
+						for(var i = start_index; i < end_index + 1; i++)
+						{
+
+							//console.log('in the loop');
+							
+							//console.log('LOOP index value: ' + i + ' ' + test_result[i]);
+
+							if(test_result[i] !== '' && test_result[i] !== null && test_result[i] != undefined)
+							{
+								current_value = test_result[i];
+								current_index = i;
+								break;
+							}
+						}
+					}
+
+					//console.log('current_index: ' + current_index);
+					//console.log('current_value: ' + current_value);
+					if(current_index !== '' && current_index !== null && current_index != undefined && current_value !== '' && current_value !== null && current_value != undefined)
+					{
+						action(current_index, current_value);
+					}
+					
+
+				});
+
+				if(eval(pattern_group_name + '_found') === true)
+				{
+					//console.log('BREAK!!!');
+					return false;
+				}
+
+			}
+
+		});//end single pattern obj
+
+	});//end pattern_object
+
+	console.log(Date.now() - start_time);
+
+
+}//end test_patterns
 
 function implode_timezones(timezones)
 {

@@ -108,7 +108,13 @@
 		{			
 			var human_time = $('input[name="human_time"]').val();
 
-			var computer_time = understand.time(human_time);
+			//var computer_time = understand.time(human_time);
+			
+			console.log('init day month year: ' + day + ' ' + month + ' ' + year);
+			
+			test_patterns(human_time, patterns);
+
+			console.log('day month year: ' + day + ' ' + month + ' ' + year);
 
 			$('code#computer_time').html(computer_time);
 		}		
