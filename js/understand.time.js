@@ -360,61 +360,129 @@ var understand = (function(){
 		]
 	};
 
-	
 
+	function init()
+	{
+		console.log('init');
+
+		compile_regex();		
+	}
+
+	var compiled_regex = [];
+	var separate_actions = {};
+
+	var regex_count = 0;
+
+	function compile_regex()
+	{
+		console.log('compiling regex');
+
+		var pattern_object = patterns;
+
+		for (var index in pattern_object) 
+		{
+			var pattern_group = pattern_object[index];
+
+			var pattern_group_name = index;
+
+			for (var index in pattern_group) 
+			{
+				var single_pattern_obj = pattern_group[index];
+
+				single_pattern_obj.pattern_group_name = pattern_group_name;
+
+				separate_actions[regex_count] = single_pattern_obj;
+
+				var pattern_string = "(?:\\s+|^\\b)" + single_pattern_obj.pattern + "(?:\\s+|\\b$)";
+
+				//console.log('Pattern: ' + pattern_string);
+
+				var pattern = new RegExp(pattern_string, "i");
+
+				compiled_regex[regex_count] = pattern;
+
+				single_pattern_obj.pattern = pattern;
+
+				regex_count++;
+			}
+		}
+		console.log('count: ' + regex_count);
+		console.log(compiled_regex);
+		console.log(separate_actions);
+	}
+
+	
+	init();
 
 	var core = {
-		test_patterns: function (test_string){
-
-			pattern_object = patterns;
+		test_patterns: function (test_string){		
 
 			var start_time = Date.now();
 
-			$.each(pattern_object, function(index, value){
-				
+			var compiled_regex_array = compiled_regex;
+			/*
+			pattern_object = patterns;
+
+			for (var index in pattern_object) 
+			{
 				var pattern_group_name = index;
 
 				console.log('Inside: ' + pattern_group_name);
 
-				var pattern_group = value;
+				var pattern_group = pattern_object[index];
 
-				$.each(pattern_group, function(index, value){
+				for (var index in pattern_group) 
+				{
 
+			*/
+				
 					//console.log('Inside: ' + index);
-
-					var single_pattern_obj = value;
-
+					//
+					
+					//var single_pattern_obj = pattern_group[index];
+					/*
 					var pattern_string = "(?:\\s+|^\\b)" + single_pattern_obj.pattern + "(?:\\s+|\\b$)";
 
 					//console.log('Pattern: ' + pattern_string);
 
 					var pattern = new RegExp(pattern_string, "i");
+					*/
+				
+					//var pattern = single_pattern_obj.pattern;
 
-					var test_result = pattern.exec(test_string);
+					//var test_result = pattern.exec(test_string);
 
+				for(var k = 0; k < regex_count; k++)
+				{
 
+					console.log(k + ': ' + compiled_regex_array[k]);
+					var test_result = compiled_regex_array[k].exec(test_string);
 
 					if(test_result !== null )
 					{
 						console.log('Result: ' + test_result);
-
+						/**/
 						//console.log('date_found? ' + date_found);
+						
+						//var pattern_group_name = separate_actions.pattern_group_name;
 
-						var ex_string = pattern_group_name + "_found = true";
+						//var ex_string = pattern_group_name + "_found = true";
 
 						//console.log('ex_string: ' + ex_string);
 
-						eval(ex_string);
+						//eval(ex_string);
 
 						//console.log('date_found? ' + date_found);
 
 						//console.log('!!!TEST RESULT length: ' + test_result.length);
 						//console.log('!!!TEST RESULT: ' + test_result);
 
-						var actions = single_pattern_obj.actions;
+						var actions = separate_actions[k].actions;
+						
 
-						$.each(actions, function(index, value){
-							var action = value;
+						for (var index in actions) 
+						{
+							var action = actions[index];
 							console.log('Action: ' + index);
 
 
@@ -476,22 +544,28 @@ var understand = (function(){
 								action(current_index, current_value);
 							}
 							
+							console.log('END');
 
-						});
+						}
 
+						/*
 						if(eval(pattern_group_name + '_found') === true)
 						{
 							//console.log('BREAK!!!');
-							return false;
+							//return false;
+							break;
 						}
+						*/
+						//break;
 
-					}
+					}//end if result null
+				} //end for loop
+			/*
+				}//end single pattern obj
 
-				});//end single pattern obj
+			}//end pattern_object
 
-			});//end pattern_object
-
-			
+			*/
 
 			console.log(Date.now() - start_time);
 
